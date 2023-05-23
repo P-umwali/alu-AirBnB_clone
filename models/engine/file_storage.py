@@ -20,13 +20,17 @@ class FileStorage:
             json.dump(serialized_objects, file)
 
     def reload(self):
-        try:
-            with open(self.__file_path, 'r') as file:
-                serialized_objects = json.load(file)
-                for key, obj_dict in serialized_objects.items():
-                    class_name, obj_id = key.split('.')
-                    class_obj = eval(class_name)  # Use eval to get the class object
-                    obj = class_obj(**obj_dict)  # Create an instance using the class object and dictionary representation
+        """deserializes the JSON file to __objects."""
+        if os.path.exists(self.__file_path):
+            with open(self.__file_path, "r") as file:
+                data = json.load(file)
+                for key, value in data.items():
+                    class_name, obj_id = key.split(".")
+                    if class_name == "BaseModel":
+                        from models.base_model import BaseModel
+                        cls = BaseModel
+                    else:
+                        cls = globals()[class_name]
+                    obj = cls(**value)
                     self.__objects[key] = obj
-        except FileNotFoundError:
-            pass
+                    
