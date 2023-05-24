@@ -25,13 +25,15 @@ class FileStorage:
 
     def reload(self):
         """Deserializes the JSON file to __objects"""
-        try:
-            with open(self.__file_path, 'r') as file:
-                obj_dict = json.load(file)
-                for key, obj_dict in obj_dict.items():
-                    class_name, obj_id = key.split('.')
-                    obj_class = models.classes[class_name]
-                    obj_instance = obj_class(**obj_dict)
-                    self.__objects[key] = obj_instance
-        except FileNotFoundError:
-            pass
+    try:
+        from models import classes 
+        with open(self.__file_path, 'r') as file:
+            obj_dict = json.load(file)
+            for key, obj_dict in obj_dict.items():
+                class_name, obj_id = key.split('.')
+                # Obtain the class dynamically using the class name
+                obj_class = getattr(models, class_name)
+                obj_instance = obj_class(**obj_dict)
+                self.__objects[key] = obj_instance
+    except FileNotFoundError:
+        pass
