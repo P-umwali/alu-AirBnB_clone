@@ -45,4 +45,4 @@ class BaseModel:
             self.updated_at = self.created_at
             storage.new(self)
 
-    # Rest of the BaseModel class implementation...
+    # Rest of the BaseModel class implementation
