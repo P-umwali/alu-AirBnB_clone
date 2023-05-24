@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""Entry point of the command interpreter"""
-
+"Entry point of the command interpreter"
 import cmd
 import models
 from models.user import User
@@ -15,7 +14,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '  # Set the custom prompt
 
     def do_quit(self, arg):
-        """Exit the program"""
+        """Quit command to exit the program"""
         return True
 
     def do_EOF(self, arg):
@@ -27,7 +26,8 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        """Create a new instance and print its ID"""
+        """Creates a new instance of BaseModel, User, Place, Review,
+        Amenity, or City saves it, and prints the id"""
         if not arg:
             print("** class name missing **")
         elif arg not in models.classes:
@@ -38,7 +38,7 @@ class HBNBCommand(cmd.Cmd):
             print(new_instance.id)
 
     def do_show(self, arg):
-        """Print the string representation of an instance"""
+        """Prints the string representation of an instance"""
         args = arg.split()
         if not arg:
             print("** class name missing **")
@@ -54,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
                 print(models.storage.all()[key])
 
     def do_destroy(self, arg):
-        """Delete an instance based on the class name and id"""
+        """Deletes an instance based on the class name and id"""
         args = arg.split()
         if not arg:
             print("** class name missing **")
@@ -71,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
                 models.storage.save()
 
     def do_all(self, arg):
-        """Print the string representations of all instances"""
+        """Prints all string representations of all instances"""
         args = arg.split()
 
         if not arg:
@@ -83,7 +83,7 @@ class HBNBCommand(cmd.Cmd):
                    if key.split('.')[0] == args[0]])
 
     def do_update(self, arg):
-        """Update an instance based on the class name and id"""
+        """Updates an instance based on the class name and id"""
         args = arg.split()
         if not arg:
             print("** class name missing **")
