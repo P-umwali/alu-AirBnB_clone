@@ -2,6 +2,8 @@
 "Entry point of the command interpreter"
 import cmd
 import models
+from models.base_model import BaseModel
+from models import storage
 from models.user import User
 from models.amenity import Amenity
 from models.city import City
