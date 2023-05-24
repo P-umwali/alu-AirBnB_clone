@@ -44,5 +44,9 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = self.created_at
             storage.new(self)
+   
+    def __set_attributes(self, attributes):
+        for attr, value in attributes.items():
+            setattr(self, attr, value)
 
     # Rest of the BaseModel class implementation
