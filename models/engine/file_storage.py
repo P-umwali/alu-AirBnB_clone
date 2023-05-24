@@ -37,3 +37,7 @@ class FileStorage:
                     if class_name == "BaseModel":
                         from models.base_model import BaseModel
                         cls = BaseModel
+                    else:
+                        cls = globals()[class_name]
+                    obj = cls(**value)
+                    self.__objects[key] = obj
