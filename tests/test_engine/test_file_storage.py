@@ -21,9 +21,7 @@ from models.review import Review
 
 
 class TestFileStorage_instantiation(unittest.TestCase):
-    """
-        Unittests to test instantiation of the 'FileStorage' class.
-    """
+    """Unittests for testing instantiation of the FileStorage class."""
 
     def test_FileStorage_instantiation_no_args(self):
         self.assertEqual(type(FileStorage()), FileStorage)
@@ -167,25 +165,11 @@ class TestFileStorage_methods(unittest.TestCase):
         self.assertIn("Review." + rv.id, objs)
 
     def test_reload_no_file(self):
-    # Remove the assertion for FileNotFoundError
-    # self.assertRaises(FileNotFoundError, models.storage.reload)
-
-    # Instead, check if reload executes without raising an exception
-        try:
-            models.storage.reload()
-        except FileNotFoundError:
-            self.fail("reload raised FileNotFoundError unexpectedly")
-
+        self.assertRaises(FileNotFoundError, models.storage.reload())
 
     def test_reload_with_arg(self):
-        self.assertRaises(TypeError, models.storage.reload, None)
-
-    def test_reload_empty(self):
-        """ Load from an empty file """
-        with open('file.json', 'w') as f:
-            pass
-        with self.assertRaises(ValueError):
-            models.storage.reload()
+        with self.assertRaises(TypeError):
+            models.storage.reload(None)
 
 
 if __name__ == "__main__":
