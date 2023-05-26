@@ -9,7 +9,8 @@ class BaseModel:
     """Represent 'BaseModel' class"""
 
     def __init__(self, *args, **kwargs):
-        """Initialize new 'BaseModel' instanceArguments:*args (any): unused**kwargs (dict): key/value pairs of attributes"""
+        """Initialize new 'BaseModel' instanceArguments:*args (any): unused**kwargs 
+        (dict): key/value pairs of attributes"""
         tform = "%Y-%m-%dT%H:%M:%S.%f"
         self.id = str(uuid4())
         self.created_at = datetime.today()
